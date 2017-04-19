@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.lang.Thread;
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class Restaurant
 {
@@ -14,12 +15,16 @@ public class Restaurant
 	public static Integer num_of_diners_served;
 	public static int table_id[];
 	public static int num_of_diners, num_of_tables, num_of_cooks;
-	public static PriorityQueue<Diner> diner; 
+	public static PriorityQueue<Diner> diner;
+	public static int diner1[];
 	public static Queue<Diner> order_list;
 	public static Integer burgers_machine, fries_machine, drinks_machine, desserts_machine; 
+	public static int result[][];
+	public static int timeunit;
 	//main is called by JVM before any object is made. Hence main is static, as it can be directly invoked via class.
 	public static void main(String [] args) throws IOException, NullPointerException, InterruptedException
 	{
+		timeunit = 200;
 		//input file name is passed as argument
 		String input_file = args[0];
 		//FileReader reads directly from the file, which is costly if you want to make multiple read requests
@@ -31,6 +36,8 @@ public class Restaurant
 		num_of_diners = Integer.parseInt(reader.readLine().trim());
 		num_of_tables =Integer.parseInt(reader.readLine().trim());
 		num_of_cooks = Integer.parseInt(reader.readLine().trim());
+		
+		result = new int[Restaurant.timeunit][5];
 		
 		num_of_diners_served = 0;
 		
@@ -51,6 +58,9 @@ public class Restaurant
 					return -1;
             }      
 		});
+		
+		diner1 = new int[num_of_diners];
+		
 		
 		order_list = new LinkedList<Diner>();
 		//0 means machine is not in use
@@ -81,15 +91,18 @@ public class Restaurant
 			//o.printOrder();
 			Diner d = new Diner(arrival_time,o,i+1);
 			diner.offer(d);
+			diner1[i] = 1;;
 			//d.printDiner();
 		}
-		
-		startTime = System.currentTimeMillis()/100;
+		//diner1 = diner;
+		//System.out.println("Diner 1 : " + Restaurant.diner1.poll().id);
+		Machine mac = new Machine();
+		startTime = System.currentTimeMillis()/Restaurant.timeunit;
 		
 		//active all cook threads
 		for(int i = 0; i < num_of_cooks; i++)
 		{
-			Cook c = new Cook(i+1);
+			Cook c = new Cook(i+1,mac);
 			Thread cT = new Thread(c);
 			cT.start();
 		}
@@ -102,12 +115,15 @@ public class Restaurant
 			Diner d = diner.poll();//get the diner from priority queue
 			//d.printDiner();
 			wait_time = d.arr_time - prev_arrival; //in minutes
+			//d.wait_time = wait_time;
 			Thread dT = new Thread(d);
-			Thread.sleep(wait_time * 100);
+			//System.out.println("Wait time : " + wait_time);
+			Thread.sleep(wait_time * Restaurant.timeunit);
 			dT.start();
 			prev_arrival = d.arr_time;
 			
 		}
+		//System.out.println("All threads started");
 		reader.close();
 		iReader.close();
 	}

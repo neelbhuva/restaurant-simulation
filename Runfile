@@ -1,0 +1,27 @@
+Compile the code using command:
+
+>> javac Restaurant.java
+
+Run the program using command :
+
+>> java Restaurant <input_filename>
+
+To write the output to a file use command :
+
+>> java Restaurant <input_filename> > <output_filename>
+
+
+
+
+For the simulation 1 minute is taken as 0.1 s.
+2 minutes as 0.2 s and so on..
+Output time unit is minutes.
+
+
+If the time at which tables are allocated seems to be off by a couple of minutes do the following:
+
+In Restaurant.java, main method, variable timeunit is assigned value 100. Increase this value to 200. If its still wrong further increase to a higher value. 
+
+
+Contact me if output is not readable.
+Email: bhuva.3@osu.edu

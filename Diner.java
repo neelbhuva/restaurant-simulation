@@ -1,3 +1,6 @@
+import java.lang.Thread;
+import java.util.*;
+
 //Diner object has arrival time and order information for each diner
 public class Diner implements Runnable{
 	
@@ -5,6 +8,7 @@ public class Diner implements Runnable{
 	public Order o;
 	public int table_acquired; //id of table where the diner will be seated
 	public int id;
+	public long wait_time;
 	
 	public Diner(long arrival_time, Order o, int diner_id)
 	{
@@ -15,15 +19,24 @@ public class Diner implements Runnable{
 	
 	public void printDiner()
 	{
-		System.out.println("Arrival time : " + arr_time);
+		System.out.println("Diner : " +  this.id + " Arrival time : " + arr_time);
 		System.out.println("Order :");
 		this.o.printOrder();
+	}
+	
+	public int getID()
+	{
+		return this.id;
 	}
 	
 	public void run()
 	{
 		try 
 		{
+			//long current_time = System.currentTimeMillis()/Restaurant.timeunit;
+			//long entered_time = current_time - Restaurant.startTime;
+			//System.out.println("Start time of diner : " + this.id + " is : " + entered_time);
+			//Thread.sleep(this.wait_time * Restaurant.timeunit);
 			//try to get a table. If not available, then wait.
 			getTable();
 		}
@@ -61,7 +74,7 @@ public class Diner implements Runnable{
 		try
 		{
 			//diner takes 30 minutes to finish food
-			Thread.sleep(30 * 100);
+			Thread.sleep(30 * Restaurant.timeunit);
 			//Leave the table in 30 minutes after food has arrived
 			exitRestaurant();
 		}
@@ -82,25 +95,53 @@ public class Diner implements Runnable{
 	
 	public void getTable() throws InterruptedException
 	{
+		//System.out.println(Restaurant.diner.poll().id);
+		while(true)
+		{
+			
+			synchronized(Restaurant.diner1)
+			{
+				if(this.id == 1)
+				{
+					break;
+				}
+				else if(Restaurant.diner1[this.id-2] == 0 && Restaurant.diner1[this.id-1] == 1)
+				{
+					//System.out.println("Diner " + this.id + " attempting to get a table");
+					//if there are no other diner ahead of me, then I will go ahead and try to acquire a table
+					break;
+				}
+			}
+			//Thread.sleep(5);
+		}
 		synchronized (Restaurant.table_id)
 		{
-			int id,i; //table id found
-			for(i = 0; i < Restaurant.num_of_tables; i++)
+			int id; //table id found
+			//System.out.println(Arrays.toString(Restaurant.table_id));
+			int i = 0;
+			while(i < Restaurant.num_of_tables)
 			{
 				if(Restaurant.table_id[i] == 0)
 				{
+					synchronized(Restaurant.diner1)
+					{
+						//System.out.println(Arrays.toString(Restaurant.diner1));
+						Restaurant.diner1[this.id-1] = 0;
+					}
 					this.table_acquired = i + 1;
 					Restaurant.table_id[i] = 1;
-					long current_time = System.currentTimeMillis()/100;
+					long current_time = System.currentTimeMillis()/Restaurant.timeunit;
 					long entered_time = current_time - Restaurant.startTime;
 					System.out.println("At Time : " + entered_time + " Diner : " + this.id + " seated at table : " + this.table_acquired + "\n");
 					break;
 				}
-				if(i == Restaurant.num_of_tables - 1)
+				if(i == (Restaurant.num_of_tables - 1))
 				{
-					i = 0;
+					i = 0; 
 					Restaurant.table_id.wait();
+					continue;
 				}
+				i++;
 			}
 			
 		}			
@@ -111,7 +152,8 @@ public class Diner implements Runnable{
 	{
 		synchronized (Restaurant.order_list)
 		{
-			Restaurant.order_list.offer(this);
+			//System.out.println("Diner : " + this.id + " placed order");
+			Restaurant.order_list.add(this);
 			Restaurant.order_list.notify();
 		}
 	}
@@ -149,7 +191,7 @@ public class Diner implements Runnable{
 			Restaurant.num_of_diners_served++;
 			if(Restaurant.num_of_diners_served.intValue() == Restaurant.num_of_diners)
 			{
-				long current_time = System.currentTimeMillis()/100;
+				long current_time = System.currentTimeMillis()/Restaurant.timeunit;
 				long exit_time = current_time - Restaurant.startTime;
 				//all diners served, close restaurant
 				System.out.println("Last diner left at time : " + exit_time);

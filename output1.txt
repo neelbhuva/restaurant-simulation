@@ -1,0 +1,125 @@
+At Time : 20 Diner : 1 seated at table : 1
+
+Cook : 1 now cooking for diner : 1
+
+At Time : 20 Burger machine for diner : 1 was used
+
+
+At Time : 30 Diner : 2 seated at table : 2
+
+Cook : 2 now cooking for diner : 2
+
+At Time : 30 Drinks machine for diner : 2 was used
+
+At Time : 30 Fries machine for diner : 1 was used
+
+At Time : 31 Diner : 3 seated at table : 3
+
+At Time : 32 Diner : 4 seated at table : 4
+
+At Time : 32 Dessert machine for diner : 2 was used
+
+At Time : 33 Burger machine for diner : 2 was used
+
+
+At time : 33 order for diner : 1 completed
+
+Cook : 1 now cooking for diner : 3
+
+At Time : 33 Fries machine for diner : 3 was used
+
+At Time : 36 Dessert machine for diner : 3 was used
+
+At time : 53 order for diner : 2 completed
+
+At Time : 53 Burger machine for diner : 3 was used
+
+
+Cook : 2 now cooking for diner : 4
+
+At Time : 53 Fries machine for diner : 4 was used
+
+At Time : 56 Dessert machine for diner : 4 was used
+
+At Time : 63 Diner : 5 seated at table : 1
+
+At time : 63 order for diner : 3 completed
+
+At Time : 63 Burger machine for diner : 4 was used
+
+
+Cook : 1 now cooking for diner : 5
+
+At Time : 63 Drinks machine for diner : 5 was used
+
+At Time : 73 Burger machine for diner : 5 was used
+
+
+At time : 73 order for diner : 4 completed
+
+At Time : 83 Diner : 6 seated at table : 2
+
+Cook : 2 now cooking for diner : 6
+
+At Time : 83 Fries machine for diner : 6 was used
+
+At time : 83 order for diner : 5 completed
+
+At Time : 86 Dessert machine for diner : 6 was used
+
+At Time : 87 Burger machine for diner : 6 was used
+
+
+At Time : 93 Diner : 7 seated at table : 3
+
+Cook : 1 now cooking for diner : 7
+
+At Time : 93 Drinks machine for diner : 7 was used
+
+At Time : 95 Dessert machine for diner : 7 was used
+
+At Time : 97 Burger machine for diner : 7 was used
+
+
+At time : 97 order for diner : 6 completed
+
+At Time : 103 Diner : 8 seated at table : 4
+
+Cook : 2 now cooking for diner : 8
+
+At Time : 103 Fries machine for diner : 8 was used
+
+At Time : 106 Dessert machine for diner : 8 was used
+
+At Time : 113 Diner : 9 seated at table : 1
+
+At Time : 117 Burger machine for diner : 8 was used
+
+
+At time : 117 order for diner : 7 completed
+
+Cook : 1 now cooking for diner : 9
+
+At Time : 117 Fries machine for diner : 9 was used
+
+At Time : 123 Dessert machine for diner : 9 was used
+
+At Time : 127 Diner : 10 seated at table : 2
+
+At time : 127 order for diner : 8 completed
+
+At Time : 127 Burger machine for diner : 9 was used
+
+
+Cook : 2 now cooking for diner : 10
+
+At Time : 127 Drinks machine for diner : 10 was used
+
+At Time : 137 Burger machine for diner : 10 was used
+
+
+At time : 137 order for diner : 9 completed
+
+At time : 147 order for diner : 10 completed
+
+Last diner left at time : 177
