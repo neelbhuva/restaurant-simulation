@@ -59,7 +59,7 @@ public class Restaurant
 		drinks_machine = new Integer(0);
 		desserts_machine = new Integer(0);
 		//get current time in minutes
-		startTime = System.currentTimeMillis()/1000;
+		
 		//System.out.println(startTime);
 		
 		//get the arrivals of diners. 
@@ -84,6 +84,8 @@ public class Restaurant
 			//d.printDiner();
 		}
 		
+		startTime = System.currentTimeMillis()/100;
+		
 		//active all cook threads
 		for(int i = 0; i < num_of_cooks; i++)
 		{
@@ -101,7 +103,7 @@ public class Restaurant
 			//d.printDiner();
 			wait_time = d.arr_time - prev_arrival; //in minutes
 			Thread dT = new Thread(d);
-			Thread.sleep(wait_time * 1000);
+			Thread.sleep(wait_time * 100);
 			dT.start();
 			prev_arrival = d.arr_time;
 			

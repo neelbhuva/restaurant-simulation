@@ -61,7 +61,7 @@ public class Diner implements Runnable{
 		try
 		{
 			//diner takes 30 minutes to finish food
-			Thread.sleep(30 * 1000);
+			Thread.sleep(30 * 100);
 			//Leave the table in 30 minutes after food has arrived
 			exitRestaurant();
 		}
@@ -91,9 +91,9 @@ public class Diner implements Runnable{
 				{
 					this.table_acquired = i + 1;
 					Restaurant.table_id[i] = 1;
-					long current_time = System.currentTimeMillis()/1000;
+					long current_time = System.currentTimeMillis()/100;
 					long entered_time = current_time - Restaurant.startTime;
-					System.out.println("Diner : " + this.id + " seated at table : " + this.table_acquired + " at time : " + entered_time);
+					System.out.println("At Time : " + entered_time + " Diner : " + this.id + " seated at table : " + this.table_acquired + "\n");
 					break;
 				}
 				if(i == Restaurant.num_of_tables - 1)
@@ -149,7 +149,7 @@ public class Diner implements Runnable{
 			Restaurant.num_of_diners_served++;
 			if(Restaurant.num_of_diners_served.intValue() == Restaurant.num_of_diners)
 			{
-				long current_time = System.currentTimeMillis()/1000;
+				long current_time = System.currentTimeMillis()/100;
 				long exit_time = current_time - Restaurant.startTime;
 				//all diners served, close restaurant
 				System.out.println("Last diner left at time : " + exit_time);

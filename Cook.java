@@ -22,7 +22,7 @@ public class Cook implements Runnable{
 				e.printStackTrace();
 			}
 			
-			System.out.println("Cook : " + this.id + " now cooking for diner : " + this.help_d.id);
+			System.out.println("Cook : " + this.id + " now cooking for diner : " + this.help_d.id + "\n");
 			//order received
 			
 			try
@@ -65,12 +65,13 @@ public class Cook implements Runnable{
 					{
 						//burger machine is free, use the machine to prepare a burger (takes 5 minutes)
 						Restaurant.burgers_machine = 1;	
-						long current_time = System.currentTimeMillis()/1000;
+						long current_time = System.currentTimeMillis()/100;
 						long start_time = current_time - Restaurant.startTime;
-						System.out.println("Burger machine for diner : " + this.help_d.id + " was used at time : " + start_time);
+						System.out.println("At Time : " + start_time + " Burger machine for diner : " + this.help_d.id + " was used\n\n" );
+						//System.out.println("Preparing Burger");
 						//use the machine for 5 minutes
-						//Thread.sleep(5 * 1000);
-						Thread.sleep(5 * 1000 * this.help_d.o.burgers );
+						//Thread.sleep(5 * 100);
+						Thread.sleep(5 * 100 * this.help_d.o.burgers );
 						//this.help_d.o.burgers--;
 						this.help_d.o.burgers = 0;
 						Restaurant.burgers_machine = 0;
@@ -88,11 +89,10 @@ public class Cook implements Runnable{
 					{
 						//burger machine is free, use the machine to prepare a burger (takes 3 minutes)
 						Restaurant.fries_machine = 1;
-						long current_time = System.currentTimeMillis()/1000;
+						long current_time = System.currentTimeMillis()/100;
 						long start_time = current_time - Restaurant.startTime;
-						System.out.println("Fries machine for diner : " + this.help_d.id + " was used at time : " + start_time);
-						//Thread.sleep(3 * 1000);
-						Thread.sleep(3 * 1000 * this.help_d.o.fries);
+						System.out.println("At Time : " + start_time + " Fries machine for diner : " + this.help_d.id + " was used\n" );						//Thread.sleep(3 * 100);
+						Thread.sleep(3 * 100 * this.help_d.o.fries);
 						//this.help_d.o.fries--;
 						this.help_d.o.fries = 0;
 						Restaurant.fries_machine = 0;
@@ -110,11 +110,10 @@ public class Cook implements Runnable{
 					{
 						//burger machine is free, use the machine to prepare a burger (takes 2 minutes)
 						Restaurant.drinks_machine = 1;	
-						long current_time = System.currentTimeMillis()/1000;
+						long current_time = System.currentTimeMillis()/100;
 						long start_time = current_time - Restaurant.startTime;
-						System.out.println("Drinks machine for diner : " + this.help_d.id + " was used at time : " + start_time);
-						//Thread.sleep(2 * 1000);
-						Thread.sleep(2 * 1000 * this.help_d.o.drinks);
+						System.out.println("At Time : " + start_time + " Drinks machine for diner : " + this.help_d.id + " was used\n" );						//Thread.sleep(2 * 100);
+						Thread.sleep(2 * 100 * this.help_d.o.drinks);
 						//this.help_d.o.drinks--;
 						this.help_d.o.drinks = 0;
 						Restaurant.drinks_machine = 0;
@@ -133,21 +132,20 @@ public class Cook implements Runnable{
 					{
 						//burger machine is free, use the machine to prepare a burger (takes 1 minutes)
 						Restaurant.desserts_machine = 1;	
-						long current_time = System.currentTimeMillis()/1000;
+						long current_time = System.currentTimeMillis()/100;
 						long start_time = current_time - Restaurant.startTime;
-						System.out.println("Desserts machine for diner : " + this.help_d.id + " was used at time : " + start_time);
-						//Thread.sleep(1 * 1000);
-						Thread.sleep(1 * 1000 * this.help_d.o.desserts);
+						System.out.println("At Time : " + start_time + " Dessert machine for diner : " + this.help_d.id + " was used\n" );						//Thread.sleep(1 * 100);
+						Thread.sleep(1 * 100 * this.help_d.o.desserts);
 						//this.help_d.o.desserts--;
 						this.help_d.o.desserts = 0;
 						Restaurant.desserts_machine = 0;
 					}
-				}
-				
-				
+				}							
 			}
 		}
-		System.out.println("order for diner : " + this.help_d.id + " completed");
+		long current_time = System.currentTimeMillis()/100;
+		long end_time = current_time - Restaurant.startTime;
+		System.out.println("At time : " + end_time + " order for diner : " + this.help_d.id + " completed\n");
 		//food ready.
 		synchronized(help_d)
 		{
